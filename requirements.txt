@@ -1,4 +1,4 @@
 streamlit
-pptx
+python-pptx
 openai
 pdf2image
