@@ -13,6 +13,7 @@ else:
     openai.api_key = api_key
     # Continuar con el resto del código que utiliza la clave de API
 
+
 # Generar el resumen utilizando GPT-3
 def generate_summary(pdf_path):
     # Leer el contenido del PDF y almacenarlo en una variable llamada 'content'
