@@ -3,6 +3,7 @@ import os
 from pptx import Presentation
 from pptx.util import Inches
 import openai
+from pdf2image import convert_from_path
 
 # Configurar la clave de la API de OpenAI
 api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
@@ -12,6 +13,7 @@ if not api_key:
 else:
     openai.api_key = api_key
     # Continuar con el resto del código que utiliza la clave de API
+
 
 
 # Generar el resumen utilizando GPT-3
@@ -39,6 +41,19 @@ def read_pdf_content(pdf_path):
     # Implementa la lógica para leer el contenido del PDF y devolverlo como una cadena de texto
     # Puedes utilizar una biblioteca como PyPDF2 o pdfminer.six
     pass
+
+
+# Convertir el PDF a imágenes utilizando pdf2image
+def convert_pdf_to_images(pdf_path):
+    images = convert_from_path(pdf_path)
+    image_paths = []
+
+    for i, image in enumerate(images):
+        image_path = f'page_{i}.png'
+        image.save(image_path, 'PNG')
+        image_paths.append(image_path)
+
+    return image_paths
 
 
 # Generar el archivo PPTX utilizando el resumen y las imágenes
@@ -84,7 +99,8 @@ def main():
 
         # Eliminar los archivos temporales
         os.remove('temp.pdf')
-        os.remove('output.pptx')
+        for image_path in images:
+            os.remove(image_path)
 
 
 if __name__ == '__main__':
