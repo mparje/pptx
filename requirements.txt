@@ -3,3 +3,4 @@ python-pptx
 openai
 pdf2image
 poppler-utils
+pymupdf
