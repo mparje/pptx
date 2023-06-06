@@ -4,10 +4,14 @@ from pptx import Presentation
 from pptx.util import Inches
 import openai
 
+# Configurar la clave de la API de OpenAI
+api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 
-# Configura la API de OpenAI
-openai.api_key = 'TU_API_KEY'
-
+if not api_key:
+    st.warning("Please enter a valid API key to continue..")
+else:
+    openai.api_key = api_key
+    # Continuar con el resto del código que utiliza la clave de API
 
 # Genera el resumen utilizando GPT-3
 def generate_summary(pdf_path):
